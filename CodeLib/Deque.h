@@ -13,13 +13,13 @@ public:
     Deque();
     ~Deque()override;
     Deque(Deque&);
+    void push(int) override;
     void pushFront(int);
-    void pushBack(int);
-    int popFront();
     int popBack();
+    int pop() override;
     int size();
-    int getFront();
     int getBack();
+    int get();
     bool isEmpty()override;
     std::string toString()override;
     void reverse();
@@ -38,7 +38,7 @@ protected:
     };
     Element* head = nullptr;
     Element* tail = nullptr;
-    int Size = 0;
+    int sizeOfDeque = 0;
 
 
 };

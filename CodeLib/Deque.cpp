@@ -25,12 +25,12 @@ Deque::Deque(Deque &old)
     current = old.head;
     while (current != nullptr)
     {
-        pushFront(current->value);
+        push(current->value);
         current = current->next;
     }
 }
 
-void Deque::pushFront(int val)
+void Deque::push(int val)
 {
     Element* newEl = new Element;
     newEl->value = val;
@@ -40,17 +40,17 @@ void Deque::pushFront(int val)
         newEl->prev = tail;
         tail->next = newEl;
         tail = newEl;
-        Size++;
+        sizeOfDeque++;
     }
     else
     {
         newEl->prev = nullptr;
         head = tail = newEl;
-        Size = 1;
+        sizeOfDeque = 1;
     }
 }
 
-void Deque::pushBack(int val)
+void Deque::pushFront(int val)
 {
     Element* newEl = new Element;
     newEl->value = val;
@@ -59,17 +59,17 @@ void Deque::pushBack(int val)
         newEl->next = head;
         head->prev = newEl;
         head = newEl;
-        Size++;
+        sizeOfDeque++;
     }
     else
     {
         newEl->next = nullptr;
         head = tail = newEl;
-        Size = 1;
+        sizeOfDeque = 1;
     }
 }
 
-int Deque::popFront()
+int Deque::popBack()
 {
     if (head != nullptr)
     {
@@ -80,7 +80,7 @@ int Deque::popFront()
             tail = tail->prev;
             tail->next = nullptr;
             delete current;
-            Size--;
+            sizeOfDeque--;
             return val;
         }
         else if (head == tail)
@@ -99,7 +99,7 @@ int Deque::popFront()
 }
 
 
-int Deque::popBack()
+int Deque::pop()
 {
     if (head != nullptr)
     {
@@ -107,7 +107,7 @@ int Deque::popBack()
         Element* current = head;
         head = head->next;
         delete current;
-        Size--;
+        sizeOfDeque--;
         return val;
     }
     else
@@ -118,7 +118,7 @@ int Deque::popBack()
 
 int Deque::size()
 {
-    return Size;
+    return sizeOfDeque;
 }
 
 
@@ -130,11 +130,11 @@ void Deque::clear()
         head = head->next;
         delete tail;
         tail = head;
-        Size = 0;
+        sizeOfDeque = 0;
     }
 }
 
-int Deque::getFront()
+int Deque::getBack()
 {
     if (tail != nullptr)
     {
@@ -146,7 +146,7 @@ int Deque::getFront()
     }
 }
 
-int Deque::getBack()
+int Deque::get()
 {
     if (head != nullptr)
     {
@@ -187,7 +187,7 @@ std::string Deque::toString()
     return std::string(line);
 }
 
-/*void Deque::reverse()
+void Deque::reverse()
 {
     if (head != nullptr)
     {
@@ -196,13 +196,13 @@ std::string Deque::toString()
         newEl = head;
         while (newEl != nullptr)
         {
-            Deq.pushBack(newEl->value);
+            Deq.pushFront(newEl->value);
             newEl = newEl->next;
         }
         clear();
         while (!Deq.isEmpty())
         {
-            pushFront(Deq.popBack());
+            push(Deq.pop());
         }
     }
     else
@@ -210,4 +210,3 @@ std::string Deque::toString()
         //mistake
     }
 }
-*/
